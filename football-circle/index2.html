@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0">
+	<title>index-2</title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/index.css" />
+	<script src="js/iscroll.js"></script>
+	<script src="js/zepto.min.js"></script>
+	<style>
+		#wrapper{
+			width:100%;
+			position: absolute;
+			left:0px;
+			top:37px;
+		}
+		#wrapper ul{
+			width:100%;
+			padding-bottom: 40px;
+			
+		}
+		#wrapper ul li{
+			width:100%;
+			background:#ccc;
+			padding-top:5px;
+		}
+		#wrapper .id-info{
+			width:100%;
+			height:59px;
+			background:#fff;
+			padding:11px 0 0 11px;
+		}
+		#wrapper .id-info img{
+			display: inline-block;
+			width:48px;
+			height:48px;
+		}
+		#wrapper .id_name{
+			padding-left:11px;
+			height:100%;
+			line-height:24px;
+		
+		}
+		#wrapper .id_name .name{
+			color:black;
+		}
+		#wrapper .id_name span{
+			color:#999999;
+		}
+		#wrapper .id_display>span{
+			color:#333333;
+			padding-left:12px;
+		}
+		#wrapper .id_display{
+			background:#fff;
+		}
+		#wrapper .id_display img{
+			width:100%;
+
+		}
+		#wrapper span{
+			line-height: 30px;
+		}
+		.left{
+			float:left;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="topBar">
+		<header>
+			<nav><a href="javascript:void(0);">热点</a><a href="javascript:void(0);">关注</a></nav>
+		</header>		
+	</div>
+	<article id="wrapper">
+		<ul id="id_list">
+			<li>
+				<div class="id-info">
+					<div class="left"><a href="javascript:void(0);"><img src="images/id1.png" alt=""></a></div>
+					<div class="left id_name">
+						<a href="javascript:void(0);" class="name">我叫小萌</a><br>
+						<span>我是小萌我怕谁！啊哈哈哈哈！</span>
+					</div>
+					
+				</div>
+				<div class="id_display">
+					<a href="javascript:void(0);"><img src="images/cat1.png" alt=""></a>
+					<span>小丸子 嘻嘻嘻</span>
+				</div>
+			</li>
+			<li>
+				<div class="id-info">
+					<div class="left"><a href="javascript:void(0);"><img src="images/id2.png" alt=""></a></div>
+					<div class="left id_name">
+						<a href="javascript:void(0);" class="name">Lily</a><br>
+						<span>Hello ~ my name is lily!</span>
+					</div>
+					
+				</div>
+				<div class="id_display">
+					<a href="javascript:void(0);"><img src="images/cat1.png" alt=""></a>
+					<span>小丸子 嘻嘻嘻</span>
+				</div>
+			</li>
+			<li>
+				<div class="id-info">
+					<div class="left"><a href="javascript:void(0);"><img src="images/id2.png" alt=""></a></div>
+					<div class="left id_name">
+						<a href="javascript:void(0);" class="name">Lily</a><br>
+						<span>Hello ~ my name is lily!</span>
+					</div>
+					
+				</div>
+				<div class="id_display">
+					<a href="javascript:void(0);"><img src="images/cat1.png" alt=""></a>
+					<span>小丸子 嘻嘻嘻</span>
+				</div>
+			</li>
+			<li>
+				<div class="id-info">
+					<div class="left"><a href="javascript:void(0);"><img src="images/id2.png" alt=""></a></div>
+					<div class="left id_name">
+						<a href="javascript:void(0);" class="name">Lily</a><br>
+						<span>Hello ~ my name is lily!</span>
+					</div>
+					
+				</div>
+				<div class="id_display">
+					<a href="javascript:void(0);"><img src="images/cat1.png" alt=""></a>
+					<span>小丸子 嘻嘻嘻</span>
+				</div>
+			</li>
+		</ul>
+	</article>
+	<footer>
+		<ul>
+			<li><a href="javascript:void(0);">首页</a></li>
+			<li><a href="javascript:void(0);">发现</a></li>
+			<li><a href="javascript:void(0);"><img src="images/camera.png" alt=""></a></li>
+			<li><a href="javascript:void(0);">我的</a></li>
+			<li><a href="javascript:void(0);">退出</a></li>
+		</ul>
+	</footer>
+	<script>
+		var myScroll;
+		window.onload=function(){
+			$("#wrapper").height($(window).height()-$(".topBar").height()-$('footer').height())
+			
+ 		//	document.getElementById('wrapper').style.height = "400px";
+ 			//$("#wrapper").height(800)
+ 			myScroll = new iScroll('wrapper', {
+ 			
+ 			
+ 			 onScrollEnd:function(){
+ 			 	
+ 			 	if($("#id_list").height()+this.y == $("#wrapper").height()){
+ 			 		//alert("底部");
+ 			 		console.log($("#id_list").height()+this.y );
+ 			 		setTimeout(function(){
+ 			 			addContent();
+ 			 	 	addContent();
+ 			 	 	addContent();
+ 			 	 },1000)
+ 			 		
+ 			 	 }
+ 			 
+ 			 	
+ 			 }
+ 			  });
+ 			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+		};
+		function addContent(){
+			var id_list = document.getElementById('id_list');
+			var xhr = new XMLHttpRequest();
+			xhr.open("get","li.xml",true);
+			xhr.send();
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState == 4 && xhr.status ==200){	
+					var res = xhr.responseText;
+					var li = document.createElement('li');
+					li.innerHTML = res;
+					//alert(xhr.responseText);
+					id_list.appendChild(li);
+					myScroll.refresh();
+				}
+			}
+			
+
+
+		}
+	</script>
+</body>
+</html>

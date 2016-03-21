@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <meta content="telephone=no" name="format-detection" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>足球圈子-登录</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/common.css"/>
+    <script src="js/iscroll.js"></script>
+    <script src="js/zepto.min.js"></script>
+</head>
+<body>
+	<header>足球圈子 — 登录</header>
+	<div class="form">
+		<input id="uid" type="text" placeholder="手机号"><input id="pwd" type="text" placeholder="密码">
+	</div>
+	<div class="links">
+		<a id="reg" href="javascript:void(0);">注册</a>
+		<a id="find" href="javascript:void(0);">忘记密码？</a>
+	</div>
+	<div class="login">
+		<button id="login">提 交</button>
+	</div>
+	<script>
+				document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);//阻止浏览器默认侧边滑动事件
+
+		$("#reg").tap(function(){
+			window.location.href = "register-page.html";
+		});
+		$("#find").tap(function(){
+			window.location.href = "pwd-find.html";
+		})
+		$(function(){
+			var login = $("#login");
+			$("#login").on("click",function(e){
+				console.log(this)
+				e.preventDefault();
+				var uid = $("#uid").val();
+				var pwd = $("#pwd").val();
+				if(true){
+					$.ajax({
+						url:"http://10.10.160.3:8080/Proxy/FootBall/user/json/login.do",
+						data:{"loginname":uid,"password":pwd},
+						success:function(d){
+							var res = JSON.parse(d)
+							console.log(res.ecode);
+							if(res.ecode == 200){
+								alert("登录成功，转到个人主页");
+								console.log(res)
+								window.location.href = "index-personal.html"
+								
+							}else if(res.ecode == 500){
+								alert("用户名或密码错误");
+							}
+						}
+					})
+				}
+
+			})
+		})
+	</script>
+
+</body>
+</html>

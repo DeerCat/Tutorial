@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0">
+	<title>index-personal</title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/index.css" />
+	<link rel="stylesheet" href="css/swiper.css" />
+	<script src="js/iscroll.js"></script>
+	<script src="js/zepto.min.js"></script>
+	<script src="js/swiper.js"></script>
+	<style>
+		.swiper-container{
+			position:relative;
+			left:0px;
+			top:76px;
+			padding-top:0;
+		}
+		.box{
+			width:100%;
+		}
+	</style>
+</head>
+<body>
+	<div class="topBar">
+		<header>
+			<nav><a href="javascript:void(0);">热点</a><a href="javascript:void(0);">关注</a></nav>
+		</header>
+		<div class="selectBar">
+			<input type="button" value="足球现场" class="selected" />
+			<input type="button" value="足球生活" />
+			<input type="button" value="足球美女" />
+			<div class="clear"></div>
+		</div>
+	</div>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="img-display  swiper-slide" id="wrapper1">
+				<div class="box" id="box1">
+					<div class="columns col1">
+						 
+					</div>
+					<div class="columns col2">
+						 
+					</div>
+					<div class="clear">
+					</div>
+				</div>
+			</div>
+			<div class="img-display  swiper-slide" id="wrapper2">
+				<div class="box" id="box1">
+					<div class="columns col1">
+					 
+					</div>
+					<div class="columns col2">
+						 
+					</div>
+					<div class="clear">
+					</div>
+				</div>
+			</div>
+			<div class="img-display swiper-slide" id="wrapper3">
+				<div class="box" id="box1">
+					<div class="columns col1">
+						 
+					</div>
+					<div class="columns col2">
+						 
+					</div>
+					<div class="clear">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer>
+		<ul>
+			<li><a href="javascript:void(0);">首页</a></li>
+			<li><a href="javascript:void(0);">发现</a></li>
+			<li><a href="javascript:void(0);"><img src="images/camera.png" alt=""></a></li>
+			<li><a href="javascript:void(0);">我的</a></li>
+			<li><a href="javascript:void(0);">退出</a></li>
+		</ul>
+	</footer>
+	<script>
+		var myScroll1,myScroll2,myScroll3;
+		var flag1 = false,flag2 = false,flag3 = false;
+			$.ajax({
+				url:"http://10.10.160.3:8080/Proxy/FootBall/tweet/json/query/hotspot.do",
+				data:{"category":"1"},
+				async:true,
+				success:function(res){
+					var tweetList = JSON.parse(res).data.tweetlist;
+					for(var i in tweetList){
+						var url = tweetList[i].defaultFilePath+""+tweetList[i].defaultFileName;
+						var img = document.createElement("img");
+						img.src = "http://101.200.173.217:8080/FootBall"+url;
+						var alink = document.createElement('a');
+						alink.appendChild(img);
+						flag1 = true;
+						if(i%2 == 0){
+							$("#wrapper1 .col1").append(alink);
+						}else{
+							$('#wrapper1 .col2').append(alink);
+						}
+					}
+					
+				} 
+			})
+		window.onload=function(){
+			$("#wrapper1").height($(window).height()-$(".topBar").height()-$('footer').height()+76);
+			$("#wrapper2").height($(window).height()-$(".topBar").height()-$('footer').height()+76);
+			$("#wrapper3").height($(window).height()-$(".topBar").height()-$('footer').height()+76);
+			document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+			console.log($("#wrapper1").height())
+			console.log($("#box1").height())
+		//	document.getElementById('wrapper').style.height = "400px";
+			//$("#wrapper").height(800)
+			myScroll1 = new iScroll('wrapper1', {
+				onScrollStart:function(){
+					myScroll1.refresh();
+				},
+				 onScrollEnd:function(){
+					if($("#wrapper1 .box").height()+this.y == $("#wrapper1").height()){
+						loada();
+					}
+				},
+			  });
+			  myScroll2 = new iScroll('wrapper2', {
+			  onScrollStart:function(){
+					myScroll2.refresh();
+				},
+				 onScrollEnd:function(){
+					if($("#wrapper2 .box").height()+this.y == $('#wrapper2').height()){
+						loadb();
+					}
+				 },
+			  });
+			  myScroll3 = new iScroll('wrapper3', {
+				onScrollStart:function(){
+					myScroll3.refresh();
+				},
+				 onScrollEnd:function(){
+					if($("#wrapper3 .box").height()+this.y == $('#wrapper3').height()){
+						loadc();
+					}
+				 },
+			  });
+		};
+			function loada(){
+				$.ajax({
+					url:"http://10.10.160.3:8080/Proxy/FootBall/tweet/json/query/hotspot.do",
+					data:{"category":"1"},
+					success:function(res){
+						var tweetList = JSON.parse(res).data.tweetlist;
+						for(var i in tweetList){
+							var url = tweetList[i].defaultFilePath+""+tweetList[i].defaultFileName;
+							var img = document.createElement("img");
+							img.src = "http://101.200.173.217:8080/FootBall"+url;
+							var alink = document.createElement('a');
+							alink.appendChild(img);
+							if(i%2 == 0){
+							
+								$("#wrapper1 .col1").append(alink);
+							}else{
+								$('#wrapper1 .col2').append(alink);
+							}
+						}
+						myScroll1.refresh();
+					} 
+				})
+			}
+			
+			function loadb(){
+						//ajax();
+				$.ajax({
+					url:"http://10.10.160.3:8080/Proxy/FootBall/tweet/json/query/hotspot.do",
+					data:{"category":"2"},
+					success:function(res){
+						var tweetList = JSON.parse(res).data.tweetlist;
+						for(var i in tweetList){
+							var url = tweetList[i].defaultFilePath+""+tweetList[i].defaultFileName;
+							var img = document.createElement("img");
+							img.src = "http://101.200.173.217:8080/FootBall"+url;
+							var alink = document.createElement('a');
+							alink.appendChild(img);
+							if(i%2 == 0){
+								$("#wrapper2 .col1").append(alink);
+							}else{
+								$('#wrapper2 .col2').append(alink);
+							}
+						} 
+						myScroll2.refresh();
+					} 
+				})
+			}
+				 
+			function loadc (){
+				$.ajax({
+					url:"http://10.10.160.3:8080/Proxy/FootBall/tweet/json/query/hotspot.do",
+					data:{"category":"3"},
+					success:function(res){
+						var tweetList = JSON.parse(res).data.tweetlist;
+						for(var i in tweetList){
+							var url = tweetList[i].defaultFilePath+""+tweetList[i].defaultFileName;
+							var img = document.createElement("img");
+							img.src = "http://101.200.173.217:8080/FootBall"+url;
+							var alink = document.createElement('a');
+							alink.appendChild(img);
+							if(i%2 == 0){
+								$("#wrapper3 .col1").append(alink);
+							}else{
+								$('#wrapper3 .col2').append(alink);
+							}
+						}
+						myScroll3.refresh();
+					}
+				})
+			}
+		
+		var mySwiper = new Swiper('.swiper-container', {
+			threshold : 100,
+			speed:1000,
+			onSlideChangeStart: function(swiper){
+			  //console.log('事件触发了;');
+			  console.log(mySwiper.activeIndex)
+			  switch(mySwiper.activeIndex){
+				case 0:
+					if(!flag1){
+					loada();
+					flag1 = true;
+					
+					}
+					
+					myScroll1.refresh();
+					break;
+					
+				case 1:
+					if(!flag2){
+					loadb();
+					flag2 = true;
+					
+					}
+					myScroll2.refresh();
+					break;
+					
+				case 2:
+					if(!flag3){
+					loadc();
+					flag3 = true;
+					
+					}
+					myScroll3.refresh();
+					break;
+					
+			  }
+			  var num = mySwiper.activeIndex;
+			  $(".selectBar input").eq(num).addClass("selected").siblings().filter("input").removeClass("selected");
+			}
+		})
+		$('.selectBar input').tap(function(){
+			$(this).addClass('selected').siblings().filter("input").removeClass("selected");
+			var num = $(this).index();
+			mySwiper.slideTo(num, 1000, false);//切换到第一个slide，速度为1秒
+			 switch(mySwiper.activeIndex){
+				case 0:
+					if(!flag1){
+					loada();
+					flag1 = true ;
+					
+					}
+					myScroll1.refresh();
+					break;
+					
+					
+				case 1:
+					if(!flag2){
+					loadb();
+					flag2 = true;
+					
+					}
+					myScroll2.refresh();
+					break;
+					
+				case 2:
+					if(!flag3){
+					loadc();
+					flag3 = true;
+					
+					}
+					myScroll3.refresh();
+					break;
+					
+			  }
+		})
+		
+		
+		
+		
+		
+	</script>
+</body>
+</html>

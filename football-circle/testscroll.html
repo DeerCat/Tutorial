@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,maximum-scale=1.0,minimum-scale=1.0">
+	<title>index-personal</title>
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/index.css" />
+	<script src="js/iscroll.js"></script>
+</head>
+<body>
+	<div class="topBar">
+		<header>
+			<nav><a href="javascript:void(0);">热点</a><a href="javascript:void(0);">关注</a></nav>
+		</header>
+		<div class="selectBar">
+			<input type="button" value="足球现场" class="selected" />
+			<input type="button" value="足球生活" />
+			<input type="button" value="足球美女" />
+			<div class="clear"></div>
+		</div>
+	</div>
+	
+	<div class="" id="wrapper" style="height:500px">
+		<ul>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			<li><img src="images/pic1.png" alt=""></li>
+			
+		</ul>
+	</div>
+	
+	<footer>
+		<ul>
+			<li><a href="javascript:void(0);">首页</a></li>
+			<li><a href="javascript:void(0);">发现</a></li>
+			<li><a href="javascript:void(0);"><img src="images/camera.png" alt=""></a></li>
+			<li><a href="javascript:void(0);">我的</a></li>
+			<li><a href="javascript:void(0);">退出</a></li>
+		</ul>
+	</footer>
+	<script>
+		window.onload=function(){
+ var myScroll;
+ myScroll = new iScroll('wrapper', { mouseWheel: true, click: true });
+ document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);
+};
+	</script>
+</body>
+</html>

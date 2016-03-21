@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+	<title>register-page</title>
+	<link rel="stylesheet" href="css/reset.css"/>
+	<link rel="stylesheet" href="css/common.css"/>
+	<script src="js/zepto.min.js"></script>
+
+</head>
+<body>
+	<header>足球圈子 — 注册</header>
+	<div class="form">
+		<input id="number" type="text" placeholder="手机号"/><p> </p>
+		<input id="pwd" type="text" placeholder="密码"/><p> </p>
+		<input id="neckname" type="text" placeholder="昵称"/>
+	</div>
+	<div class="login">
+		<button id="login">提 交</button>
+	</div>
+	<script>
+	window.onload = function(){
+		document.addEventListener('touchmove', function (e) { e.preventDefault(); }, false);//阻止浏览器默认侧边滑动事件
+		var number = $("#number"),
+				pwd = $("#pwd"),
+				neckname = $("#neckname"),
+				login = $("#login"),
+				flag1 = false,
+				flag2 = false;
+				
+			
+			number.blur(function(){
+				var pattern =  /^[1|2][3-9]\d{9}$/;
+				if(pattern.test(number.val())){
+					$(this).next().html("");
+					flag1 = true;
+				}else{
+					$(this).next().html("请输入正确的手机号码");
+					flag1 = false;
+				}
+				
+				
+			})
+			pwd.blur(function(){
+				var pattern = /^[A-Za-z0-9]+$/;
+				if(pattern.test(pwd.val())){
+					$(this).next().html("");
+					flag2 = true;
+				}else{
+					$(this).next().html("请输入符合要求的密码");
+				}
+				return pattern.test(pwd.val());
+				
+			})
+			//console.log(flag1)
+			login.tap(function(){
+				
+				if(flag1&&flag2){
+					$.ajax({
+							url:"http://10.10.160.3:8080/Proxy/FootBall/user/json/reg.do",
+							data:{"loginname":number.val(),"password":pwd.val()},
+							async:false,
+							success:function(d){
+								
+								var res = JSON.parse(d).ecode;
+								if(res == 200){
+									alert("注册成功，转到登录页面");
+									console.log(JSON.parse(d))
+									window.location.href = "login.html";
+								}else if(res == 500){
+									alert("用户已注册，请更换手机号码");
+								}
+								
+								
+							}
+						})
+				}
+			
+			})
+	
+	}
+		
+		
+		
+	</script>
+</body>
+</html>

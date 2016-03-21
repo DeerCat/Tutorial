@@ -1,0 +1,13 @@
+
+	<div class="id-info">
+		<div class="left"><a href="javascript:void(0);"><img src="images/id2.png" alt=""></a></div>
+		<div class="left id_name">
+			<a href="javascript:void(0);" class="name">Lily</a><br>
+			<span>Hello ~ my name is lily!</span>
+		</div>
+		
+	</div>
+	<div class="id_display">
+		<a href="javascript:void(0);"><img src="images/cat1.png" alt=""></a>
+		<span>小丸子 嘻嘻嘻</span>
+	</div>
